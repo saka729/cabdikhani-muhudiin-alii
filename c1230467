@@ -1,0 +1,95 @@
+package company;
+
+import java.util.EmptyStackException;
+
+public class array {
+    private static final int CONST = 2;
+    private int size;
+    private String[] array;
+
+    // Constructor
+    public array() {
+        this(CONST);
+    }
+
+    // Constructor
+    public array(int initialize) {
+        size = 0;
+        array = new String[initialize]; // array string ah
+    }
+
+    //  display element-yada
+    public void display() {
+        if (isEmpty()) {
+            System.out.println("Array is empty");
+            return;
+        }
+
+        System.out.println("Array elements:");
+        for (int i = 0; i < size; i++) {
+            System.out.print(array[i] + " ");
+        }
+        System.out.println();
+    }
+
+    // Hel tirada hadda la isticmaalay
+    public int size() {
+        return size;
+    }
+
+    // Ku dar element cusub
+    public void push(String element) {
+        if (size == array.length) {
+            expand(); // kordhi array-ga marka uu buuxsamo
+        }
+        array[size++] = element;
+    }
+
+    // Ka saar element-kii ugu dambeeyay
+    public String pop() {
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        String result = array[--size];
+        array[size] = null;
+        return result;
+    }
+
+    // Hubi in uu maran yahay
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    // Hel element-kii ugu dambeeyay
+    public String peek() {
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        return array[size - 1];
+    }
+
+    // Kordhi cabbirka array-ga marka uu buuxsamo
+    private void expand() {
+        String[] newArray = new String[array.length * 2]; // abuur array cusub oo weyn
+        System.arraycopy(array, 0, newArray, 0, array.length); // xogtii hore u gudbi
+        array = newArray;
+    }
+}
+package company;
+
+public class taster {
+    public static void main(String[] args) {
+        array s1 = new array();
+
+        s1.push("Ridwan");
+        s1.push("Nour");
+        s1.push("Hersi");
+        s1.push("DSU");
+        s1.display();
+        System.out.println("Peek: " + s1.peek());
+        System.out.println("Pop: " + s1.pop());
+        s1.display();
+        System.out.println("Size: " + s1.size());
+    }
+}
+
